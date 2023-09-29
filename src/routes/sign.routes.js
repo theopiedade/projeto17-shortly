@@ -1,6 +1,6 @@
 import { Router } from "express"
 import { signUp, signIn } from "../controllers/sign.controllers"
-import { schemaUser } from "../schemas/user.schemas"
+import { schemaUser, schemaSignIn } from "../schemas/user.schemas"
 
 const recipeRouter = Router()
 
