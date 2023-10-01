@@ -29,7 +29,8 @@ CREATE TABLE public.signs (
     "userId" integer NOT NULL,
     "time" timestamp with time zone NOT NULL,
     state boolean NOT NULL,
-    token text NOT NULL
+    token text NOT NULL,
+    "createdAt" timestamp with time zone[] NOT NULL
 );
 
 
@@ -62,7 +63,8 @@ CREATE TABLE public.urls (
     "userId" integer NOT NULL,
     url text NOT NULL,
     short text NOT NULL,
-    views integer DEFAULT 0 NOT NULL
+    views integer DEFAULT 0 NOT NULL,
+    "createdAt" timestamp with time zone[] NOT NULL
 );
 
 
@@ -94,7 +96,8 @@ CREATE TABLE public.users (
     id integer NOT NULL,
     name text NOT NULL,
     email text NOT NULL,
-    password text NOT NULL
+    password text NOT NULL,
+    "createdAt" timestamp with time zone[] NOT NULL
 );
 
 
