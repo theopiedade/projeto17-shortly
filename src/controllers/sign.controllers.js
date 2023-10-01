@@ -32,7 +32,7 @@ export async function signIn(req, res) {
     if (checkUser.rowCount <= 0) return res.sendStatus(401);
 
     const passwordCrypt = bcrypt.hashSync(password, 10);
-    if (passwordCrypt !== checkUser.rows[0]) return res.sendStatus(401);
+    if (passwordCrypt !== checkUser.rows[0].password) return res.sendStatus(401);
 
     const token = uuid();
        
