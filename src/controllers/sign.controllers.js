@@ -6,7 +6,7 @@ export async function signUp(req, res) {
     const { name, email, password, confirmPassword  } = req.body;
 
     const checkEmail = await db.query(`SELECT * FROM users WHERE "email" = $1;`, [email]);
-    if (checkEmail.rowCount <= 0) return res.sendStatus(409);
+    if (checkEmail.rowCount > 0) return res.sendStatus(409);
     if (password !== confirmPassword) return res.sendStatus(409);
 
     const passwordCrypt = bcrypt.hashSync(password, 10);
