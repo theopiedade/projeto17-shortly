@@ -32,14 +32,26 @@ export async function signIn(req, res) {
     if (checkUser.rowCount <= 0) return res.sendStatus(401);
 
     const passwordCheck = bcrypt.compareSync(password, checkUser.rows[0].password);
-    if (!passwordCheck) return res.sendStatus(422);
+    if (!passwordCheck) return res.sendStatus(401);
 
     const token = uuid();
-       
     const data = {
-     token: token
-    }
+        token: token
+      }
 
-    res.status(200).send(data);
+    const userId = checkUser.rows[0].id;
+    const state = true;
+
+    try{
+
+        await db.query(`INSERT INTO signs (userId, state, token) VALUES ($1, $2, $3);`,
+        [userId, state, token]);
+     
+       
+           res.status(200).send(data);
+
+    }catch(err){
+        return res.status(500).send(err.message);
+    }
 
 }
