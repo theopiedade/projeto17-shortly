@@ -13,9 +13,6 @@ export async function signUp(req, res) {
 
     try{
 
-        console.log("Passou até aqui");
-
-
         await db.query(`INSERT INTO users (name, email, password) VALUES ($1, $2, $3);`,
         [name, email, passwordCrypt]);
 
