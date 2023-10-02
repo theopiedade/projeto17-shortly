@@ -53,8 +53,8 @@ export async function getUrl(req, res) {
 
     const data = {
         id: id,
-        shortUrl: checkUrl.short,
-        url: checkUrl.url
+        shortUrl: checkUrl.rows[0].short,
+        url: checkUrl.rows[0].url
     }
 
     return res.status(200).send(data);
