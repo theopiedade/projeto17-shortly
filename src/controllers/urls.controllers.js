@@ -19,7 +19,7 @@ export async function urlShort(req, res) {
     const checkToken = await db.query(`SELECT * FROM signs WHERE token = $1;`, [token]);
     if (checkUser.rowCount <= 0) return res.sendStatus(401);
 
-    if (!isValidUrl(url)) return res.sendStatus(422);
+    //if (!isValidUrl(url)) return res.sendStatus(422);
 
     const shortUrl = nanoid();
 
