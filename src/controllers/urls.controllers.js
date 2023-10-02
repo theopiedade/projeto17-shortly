@@ -2,6 +2,14 @@ import db from '../database/database.connection.js';
 import bcrypt from 'bcrypt';
 import { nanoid } from 'nanoid';
 
+function isValidUrl(string) {
+    try {
+      new URL(string);
+      return true;
+    } catch (err) {
+      return false;
+    }
+  }
 
 export async function urlShort(req, res) {
     const { url } = req.body;
@@ -11,8 +19,7 @@ export async function urlShort(req, res) {
     const checkToken = await db.query(`SELECT * FROM signs WHERE token = $1;`, [token]);
     if (checkUser.rowCount <= 0) return res.sendStatus(401);
 
-    const checkUrl = new URL(url);
-    if (!checkUrl) return res.sendStatus(422);
+    //if (!isValidUrl(url)) return res.sendStatus(422);
 
     const shortUrl = nanoid();
 
