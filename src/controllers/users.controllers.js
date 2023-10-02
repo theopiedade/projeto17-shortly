@@ -12,27 +12,22 @@ export async function getUsersMe(req, res) {
     const getUser = await db.query(`SELECT * FROM users WHERE id = $1;`, [id]);
     const name = getUser.rows[0].name;
 
-    const sumViews = await db.query(`SELECT SUM(views) FROM urls WHERE userid = $1;`, [id]);
+    const views = await db.query(`SELECT SUM(views) FROM urls WHERE userid = $1;`, [id]);
+    const sumViews = views.rows[0].sum;
 
-    const getUrls = await db.query(`SELECT (id, short, url, views) FROM urls WHERE userid = $1;`, [id]);
+    const getUrls = await db.query(`SELECT JSON_BUILD_OBJECT('id', id, 'shortUrl', short, 'url', url, 'visitcount', views) AS "json" 
+    FROM urls WHERE userid = $1;`, [id]);
+    
 
-    const urls = getUrls.rows.map( u => {
-        return {
-            ...u,
-            id: u.id,
-            shortUrl: u.short,
-            url: u.url,
-            visitCount: u.views
-        }
-    });
 
-        const data = {
-            id: id,
-            name: name,
-            visitCount: sumViews,
-            shortenedUrls: [ urls ]
-        }
+    const data = {
+       id: id,
+       name: name,
+       visitCount: sumViews,
+       shortenedUrls: getUrls.rows.map( u => u.json)
+     }
+   
 
-        return res.status(200).send(data);
+   return res.status(200).send(data);
 
 }
