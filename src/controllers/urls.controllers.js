@@ -13,7 +13,7 @@ function isValidUrl(string) {
 
 export async function urlShort(req, res) {
     const { url } = req.body;
-    const { authorization } = req.header;
+    const { authorization } = req.headers;
     const token = authorization?.replace('Bearer ', '');
 
     const checkToken = await db.query(`SELECT * FROM signs WHERE token = $1;`, [token]);
