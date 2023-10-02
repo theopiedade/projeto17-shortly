@@ -36,9 +36,9 @@ export async function ranking(req, res) {
 
 
   const getUrls = await db.query(`
-  SELECT JSON_BUILD_OBJECT('id', users.id, 'name', users.name, 'linksCount', 
-  COUNT(urls.id), 'visitcount', SUM(url.views) AS "json" FROM users JOIN urls ON urls.userid = users.id
-  GROUP BY users.id;`);
+  SELECT JSON_BUILD_OBJECT('id', id, 'name', name, 'linksCount', 
+  COUNT(url.id), 'visitcount', SUM(url.views)) AS "json" FROM users JOIN urls ON url.userid = users.id 
+  GROUP BY users.id ORDER BY linksCount DESC;`);
   
 
 
