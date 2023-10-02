@@ -90,7 +90,8 @@ export async function deleteUrl(req, res) {
     const userId = checkToken.rows[0].userid;
 
     const checkUrl = await db.query(`SELECT * FROM urls WHERE id = $1 AND userid = $2;`, [id, userId]);
-    if (checkUrl.rowCount <= 0) return res.sendStatus(404);
+    if (checkUrl.rowCount <= 0) return res.sendStatus(401);
+
 
     try{
 
