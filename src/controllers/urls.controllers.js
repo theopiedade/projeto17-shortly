@@ -21,12 +21,12 @@ export async function urlShort(req, res) {
 
 
     const shortUrl = nanoid();
-
+    const userId = checkToken.rows[0].userid;
 
     try{
 
-        await db.query(`INSERT INTO urls (url, short) VALUES ($1, $2);`,
-        [url, shortUrl]);
+        await db.query(`INSERT INTO urls (url, short, userid) VALUES ($1, $2, $3);`,
+        [url, shortUrl, userId]);
 
 
         const checkID = await db.query(`SELECT * FROM urls WHERE short = $1;`, [shortUrl]);
@@ -80,7 +80,7 @@ export async function openShortUrl(req, res) {
 
 export async function deleteUrl(req, res) {
     const { id } = req.params;
-    const { authorization } = req.header;
+    const { authorization } = req.headers;
     const token = authorization?.replace('Bearer ', '');
 
     const checkToken = await db.query(`SELECT * FROM signs WHERE token = $1;`, [token]);

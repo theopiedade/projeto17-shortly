@@ -62,7 +62,8 @@ CREATE TABLE public.urls (
     url text NOT NULL,
     short text NOT NULL,
     views integer DEFAULT 0 NOT NULL,
-    "createdAt" timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
+    "createdAt" timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    userid integer NOT NULL
 );
 
 
@@ -151,6 +152,8 @@ INSERT INTO public.signs VALUES (1, 1, 'abcd', true, '2023-10-01 22:36:20.873187
 -- Data for Name: urls; Type: TABLE DATA; Schema: public; Owner: -
 --
 
+INSERT INTO public.urls VALUES (1, 'http://www.google.com', 'http://go.gl', 5, '2023-10-02 00:24:48.358531-03', 1);
+INSERT INTO public.urls VALUES (2, 'https://regular-want.br', 'g7MgRBfIMH-WKedyUUkbi', 0, '2023-10-02 13:16:36.730348-03', 1);
 
 
 --
@@ -158,6 +161,7 @@ INSERT INTO public.signs VALUES (1, 1, 'abcd', true, '2023-10-01 22:36:20.873187
 --
 
 INSERT INTO public.users VALUES (1, 't@p.com', 'abc123', '2023-10-01 20:20:52.772968-03', 'Theo');
+INSERT INTO public.users VALUES (2, 'theo@driven.com', '$2b$10$9ownCoraNAZEpnpiSVhOSu7W5bXld2bgq1cfaY1jSeiDdM/Yz2yzq', '2023-10-02 11:56:47.263022-03', 'Theo');
 
 
 --
@@ -171,14 +175,14 @@ SELECT pg_catalog.setval('public.signs_id_seq', 1, true);
 -- Name: urls_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.urls_id_seq', 1, false);
+SELECT pg_catalog.setval('public.urls_id_seq', 2, true);
 
 
 --
 -- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.users_id_seq', 1, true);
+SELECT pg_catalog.setval('public.users_id_seq', 2, true);
 
 
 --
