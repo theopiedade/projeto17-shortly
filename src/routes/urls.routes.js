@@ -1,6 +1,7 @@
 import { Router } from "express"
 import { schemaUrl } from "../schemas/urls.schemas.js"
 import { deleteUrl, urlShort, getUrl, openShortUrl } from "../controllers/urls.controllers.js"
+import { validateSchema } from "../middlewares/validateschema.js"
 
 const urlsRouter = Router()
 
