@@ -31,3 +31,9 @@ export async function getUsersMe(req, res) {
    return res.status(200).send(data);
 
 }
+
+/*export async function ranking(req, res) {
+//    const getRanking = await db.
+
+    return res.status(200).send(data);
+}*/

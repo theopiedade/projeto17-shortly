@@ -70,7 +70,7 @@ export async function openShortUrl(req, res) {
     const count = parseInt(checkUrl.rows[0].views) + 1;
 
     try {
-        await db.query(`UPDATE urls SET views = $1 WHERE short = $1;`, [shortUrl]);
+        await db.query(`UPDATE urls SET views = $1 WHERE short = $2;`, [count, shortUrl]);
         res.redirect(checkUrl.rows[0].url);
     } catch (err) {
         return res.status(500).send(err.message);
