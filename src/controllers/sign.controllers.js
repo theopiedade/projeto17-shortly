@@ -44,8 +44,8 @@ export async function signIn(req, res) {
 
     try{
 
-        await db.query(`INSERT INTO signs (userId, state, token) VALUES ($1, $2, $3);`,
-        [userId, state, token]);
+        await db.query(`INSERT INTO signs (userid, token, state) VALUES ($1, $2, $3);`,
+        [userId, token, state]);
      
        
         return res.status(200).send(data);

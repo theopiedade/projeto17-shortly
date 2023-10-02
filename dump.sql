@@ -26,7 +26,7 @@ SET default_table_access_method = heap;
 
 CREATE TABLE public.signs (
     id integer NOT NULL,
-    "userId" integer NOT NULL,
+    userid integer NOT NULL,
     token text NOT NULL,
     state boolean NOT NULL,
     "createdAt" timestamp with time zone DEFAULT CURRENT_TIMESTAMP
@@ -144,6 +144,7 @@ ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_
 -- Data for Name: signs; Type: TABLE DATA; Schema: public; Owner: -
 --
 
+INSERT INTO public.signs VALUES (1, 1, 'abcd', true, '2023-10-01 22:36:20.873187-03');
 
 
 --
@@ -163,7 +164,7 @@ INSERT INTO public.users VALUES (1, 't@p.com', 'abc123', '2023-10-01 20:20:52.77
 -- Name: signs_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.signs_id_seq', 1, false);
+SELECT pg_catalog.setval('public.signs_id_seq', 1, true);
 
 
 --
