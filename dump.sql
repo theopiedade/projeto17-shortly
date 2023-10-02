@@ -27,10 +27,9 @@ SET default_table_access_method = heap;
 CREATE TABLE public.signs (
     id integer NOT NULL,
     "userId" integer NOT NULL,
-    "time" timestamp with time zone NOT NULL,
-    state boolean NOT NULL,
     token text NOT NULL,
-    "createdAt" timestamp with time zone DEFAULT clock_timestamp() NOT NULL
+    state boolean NOT NULL,
+    "createdAt" timestamp with time zone DEFAULT CURRENT_TIMESTAMP
 );
 
 
@@ -60,11 +59,10 @@ ALTER SEQUENCE public.signs_id_seq OWNED BY public.signs.id;
 
 CREATE TABLE public.urls (
     id integer NOT NULL,
-    "userId" integer NOT NULL,
     url text NOT NULL,
     short text NOT NULL,
     views integer DEFAULT 0 NOT NULL,
-    "createdAt" timestamp with time zone DEFAULT clock_timestamp() NOT NULL
+    "createdAt" timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
 
 
@@ -94,10 +92,10 @@ ALTER SEQUENCE public.urls_id_seq OWNED BY public.urls.id;
 
 CREATE TABLE public.users (
     id integer NOT NULL,
-    name text NOT NULL,
     email text NOT NULL,
     password text NOT NULL,
-    "createdAt" timestamp with time zone DEFAULT clock_timestamp() NOT NULL
+    "createdAt" timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    name text NOT NULL
 );
 
 
@@ -158,6 +156,7 @@ ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_
 -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: -
 --
 
+INSERT INTO public.users VALUES (1, 't@p.com', 'abc123', '2023-10-01 20:20:52.772968-03', 'Theo');
 
 
 --
@@ -178,7 +177,15 @@ SELECT pg_catalog.setval('public.urls_id_seq', 1, false);
 -- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.users_id_seq', 1, false);
+SELECT pg_catalog.setval('public.users_id_seq', 1, true);
+
+
+--
+-- Name: signs signs_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.signs
+    ADD CONSTRAINT signs_pkey PRIMARY KEY (id);
 
 
 --

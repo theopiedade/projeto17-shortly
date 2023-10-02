@@ -48,7 +48,7 @@ export async function signIn(req, res) {
         [userId, state, token]);
      
        
-           res.status(200).send(data);
+        return res.status(200).send(data);
 
     }catch(err){
         return res.status(500).send(err.message);
