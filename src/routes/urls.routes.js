@@ -4,6 +4,6 @@ import { urlShort } from "../controllers/urls.controllers.js"
 
 const urlsRouter = Router()
 
-urlsRouter.post("/urls/shorten", validateSchema(schemaUrl), urlShort);
+urlsRouter.post("/urls/shorten", urlShort);
 
 export default urlsRouter
