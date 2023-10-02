@@ -93,8 +93,8 @@ export async function deleteUrl(req, res) {
 
     try{
 
-        await db.query(`DELETE * from urls WHERE id = $1;`, [id]);
-        return res.status(204);
+        await db.query(`DELETE FROM urls WHERE id = $1;`, [id]);
+        return res.sendStatus(204);
 
     }catch(err){
         return res.status(500).send(err.message);
